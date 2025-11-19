@@ -4,6 +4,7 @@ import { motion, useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { Calendar, Users, Bell } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import AnimatedCounter from "@/components/ui/animated-counter";
 
 export default function StatsBar() {
   const [isSticky, setIsSticky] = useState(false);
@@ -51,7 +52,9 @@ export default function StatsBar() {
           <div className="flex items-center gap-3">
             <Users className="w-6 h-6 text-primary" />
             <div>
-              <p className="text-sm font-semibold text-gray-900">100+ Positions</p>
+              <p className="text-sm font-semibold text-gray-900">
+                <AnimatedCounter value={100} className="inline" />+ Positions
+              </p>
             </div>
           </div>
 

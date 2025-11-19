@@ -4,6 +4,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { TrendingUp, Users as UsersIcon, DollarSign } from "lucide-react";
+import Image from "next/image";
 
 export default function WhyWorkWithUs() {
   const ref = useRef(null);
@@ -25,6 +26,7 @@ export default function WhyWorkWithUs() {
         quote: "The H4U model lets me focus on what matters: building relationships.",
         author: "Sarah, RN",
       },
+      bgImage: "/images/blue-background-600x183.jpg",
     },
     {
       value: "culture",
@@ -41,6 +43,7 @@ export default function WhyWorkWithUs() {
         quote: "I've never felt more valued as a healthcare professional.",
         author: "Michael, LPN",
       },
+      bgImage: "/images/light-turquoise-background-600x184.jpg",
     },
     {
       value: "compensation",
@@ -57,20 +60,21 @@ export default function WhyWorkWithUs() {
         quote: "The benefits package made my decision to relocate easy.",
         author: "Jennifer, Care Aide",
       },
+      bgImage: "/images/purple-background-600x184.jpg",
     },
   ];
 
   return (
-    <section className="py-20 bg-white">
-      <div className="container mx-auto px-6">
+    <section className="py-24 md:py-32 bg-white">
+      <div className="container mx-auto px-6 md:px-8">
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="text-center mb-12"
+          className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-display-lg font-bold text-primary mb-2">
+          <h2 className="text-4xl md:text-5xl lg:text-display-lg font-bold text-primary mb-4">
             MORE THAN A JOB—A CAREER WITH PURPOSE
           </h2>
           <div className="h-1 w-64 bg-accent mx-auto" />
@@ -140,8 +144,13 @@ export default function WhyWorkWithUs() {
                       — {tab.testimonial.author}
                     </p>
                   </div>
-                  <div className="mt-6 h-48 bg-gradient-to-br from-primary/5 to-accent/5 rounded-md flex items-center justify-center">
-                    <p className="text-gray-400">Video testimonial placeholder</p>
+                  <div className="mt-6 h-48 relative rounded-lg overflow-hidden">
+                    <Image
+                      src={tab.bgImage}
+                      alt={`${tab.label} background`}
+                      fill
+                      className="object-cover"
+                    />
                   </div>
                 </motion.div>
               </div>

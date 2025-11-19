@@ -1,6 +1,5 @@
-import Hero from "@/components/Hero";
-import StatsBar from "@/components/StatsBar";
-import AboutFacility from "@/components/AboutFacility";
+import HeroProfessional from "@/components/HeroProfessional";
+import AboutFacilityBento from "@/components/AboutFacilityBento";
 import WhyPrinceGeorge from "@/components/WhyPrinceGeorge";
 import WhyWorkWithUs from "@/components/WhyWorkWithUs";
 import SignupForm from "@/components/SignupForm";
@@ -11,9 +10,8 @@ import Footer from "@/components/Footer";
 export default function Home() {
   return (
     <main className="min-h-screen">
-      <Hero />
-      <StatsBar />
-      <AboutFacility />
+      <HeroProfessional />
+      <AboutFacilityBento />
       <WhyPrinceGeorge />
       <WhyWorkWithUs />
       <SignupForm />

@@ -2,9 +2,8 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Card } from "@/components/ui/card";
-import { CardContainer, CardBody, CardItem } from "@/components/ui/3d-card";
 import { Mountain, Home, Heart, GraduationCap } from "lucide-react";
+import Image from "next/image";
 
 export default function WhyPrinceGeorge() {
   const ref = useRef(null);
@@ -38,24 +37,24 @@ export default function WhyPrinceGeorge() {
   ];
 
   return (
-    <section id="prince-george" className="py-20 bg-accent-light relative overflow-hidden">
+    <section id="prince-george" className="py-24 md:py-32 bg-accent-light relative overflow-hidden">
       {/* Background Grid */}
       <div className="absolute inset-0 bg-grid-black/[0.05] [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]" />
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-6 md:px-8">
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="text-center mb-12"
+          className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-display-lg font-bold text-primary mb-2">
+          <h2 className="text-4xl md:text-5xl lg:text-display-lg font-bold text-primary mb-4">
             LIVE, WORK, THRIVE IN PRINCE GEORGE
           </h2>
           <div className="h-1 w-64 bg-accent mx-auto" />
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
           {benefits.map((benefit, index) => {
             const Icon = benefit.icon;
             return (
@@ -64,65 +63,72 @@ export default function WhyPrinceGeorge() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="group"
               >
-                <CardContainer className="inter-var w-full">
-                  <CardBody className="bg-white relative group/card dark:hover:shadow-2xl dark:hover:shadow-accent/[0.1] dark:bg-black dark:border-white/[0.2] border-gray-200 w-full h-auto rounded-xl p-6 border hover:shadow-xl transition-shadow">
-                    <CardItem
-                      translateZ="50"
-                      className="w-full flex flex-col items-center text-center space-y-4"
-                    >
-                      <CardItem
-                        translateZ="100"
-                        className="w-16 h-16 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center shadow-md"
-                      >
-                        <Icon className="w-8 h-8 text-primary" />
-                      </CardItem>
+                <div className="bg-white rounded-xl p-8 border border-gray-200 hover:border-accent-300 hover:shadow-lg transition-all duration-300 h-full flex flex-col items-center text-center space-y-4">
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <Icon className="w-8 h-8 text-primary" />
+                  </div>
 
-                      <div className="space-y-2">
-                        <CardItem
-                          translateZ="60"
-                          as="h3"
-                          className="text-xl font-bold text-gray-900"
-                        >
-                          {benefit.title}
-                        </CardItem>
-                        <CardItem
-                          translateZ="40"
-                          as="p"
-                          className="text-lg font-semibold text-accent"
-                        >
-                          {benefit.description}
-                        </CardItem>
-                        <CardItem
-                          translateZ="30"
-                          as="p"
-                          className="text-sm text-gray-600"
-                        >
-                          {benefit.detail}
-                        </CardItem>
-                      </div>
-                    </CardItem>
-                  </CardBody>
-                </CardContainer>
+                  <div className="space-y-2">
+                    <h3 className="text-xl font-bold text-gray-900">
+                      {benefit.title}
+                    </h3>
+                    <p className="text-lg font-semibold text-accent">
+                      {benefit.description}
+                    </p>
+                    <p className="text-sm text-gray-600 leading-relaxed">
+                      {benefit.detail}
+                    </p>
+                  </div>
+                </div>
               </motion.div>
             );
           })}
         </div>
 
-        {/* Panoramic Image Carousel Placeholder */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.5 }}
-          className="relative h-64 md:h-96 rounded-lg overflow-hidden bg-gradient-to-r from-primary via-accent to-primary-light shadow-xl"
-        >
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-center text-white space-y-2">
-              <p className="text-2xl font-bold">Discover Prince George</p>
-              <p className="text-lg">Beautiful landscapes and vibrant community</p>
+        {/* Facility & Location Images */}
+        <div className="grid md:grid-cols-2 gap-6">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="relative h-64 md:h-80 rounded-xl overflow-hidden shadow-xl"
+          >
+            <Image
+              src="/images/prince_george_facility_from_top.jpg"
+              alt="Providence Living Prince George facility aerial view"
+              fill
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-primary-dark/70 via-transparent to-transparent flex items-end">
+              <div className="p-6 text-white space-y-1">
+                <p className="text-2xl font-bold">Your Future Home</p>
+                <p className="text-lg">State-of-the-art facility opening 2027</p>
+              </div>
             </div>
-          </div>
-        </motion.div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="relative h-64 md:h-80 rounded-xl overflow-hidden shadow-xl"
+          >
+            <Image
+              src="/images/Rodello-Street-View.jpg"
+              alt="Prince George downtown"
+              fill
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-primary-dark/70 via-transparent to-transparent flex items-end">
+              <div className="p-6 text-white space-y-1">
+                <p className="text-2xl font-bold">Discover Prince George</p>
+                <p className="text-lg">Vibrant city with outdoor adventures</p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

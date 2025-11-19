@@ -88,10 +88,10 @@ export default function SignupForm() {
   };
 
   return (
-    <section id="signup" className="py-20 bg-gradient-to-br from-primary via-primary to-primary-light relative overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 bg-dot-white/[0.1]" />
-      <div className="container mx-auto px-6">
+    <section id="signup" className="py-24 md:py-32 bg-gradient-to-br from-gray-50 to-primary-50 relative overflow-hidden">
+      {/* Subtle Background Pattern */}
+      <div className="absolute inset-0 bg-grid-black/[0.02]" />
+      <div className="container mx-auto px-6 md:px-8">
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 30 }}
@@ -99,12 +99,12 @@ export default function SignupForm() {
           transition={{ duration: 0.8 }}
           className="max-w-2xl mx-auto"
         >
-          <div className="text-center mb-8 text-white">
-            <h2 className="text-3xl md:text-display-lg font-bold mb-2">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl lg:text-display-lg font-bold text-primary mb-4">
               BE FIRST TO KNOW ABOUT OPPORTUNITIES
             </h2>
             <div className="h-1 w-64 bg-accent mx-auto mb-6" />
-            <p className="text-lg">
+            <p className="text-xl text-gray-700">
               Join {signupCount}+ people already signed up for updates
             </p>
           </div>
@@ -113,7 +113,7 @@ export default function SignupForm() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="bg-white rounded-lg p-8 shadow-lg relative overflow-hidden"
+            className="bg-white rounded-xl p-10 shadow-xl border border-gray-100 relative overflow-hidden"
           >
             <AnimatePresence mode="wait">
               {!isSubmitted ? (
@@ -136,8 +136,8 @@ export default function SignupForm() {
                         type="text"
                         value={formData.firstName}
                         onChange={(e) => handleInputChange("firstName", e.target.value)}
-                        className={`transition-all duration-300 focus:border-accent focus:ring-2 focus:ring-accent focus:scale-[1.02] ${
-                          errors.firstName ? "border-red-500 shake" : ""
+                        className={`transition-all duration-300 focus:border-accent focus:ring-2 focus:ring-accent ${
+                          errors.firstName ? "border-red-500" : ""
                         }`}
                         placeholder="Enter your first name"
                       />
@@ -261,10 +261,9 @@ export default function SignupForm() {
                   {/* Submit Button */}
                   <button
                     type="submit"
-                    className="w-full bg-gradient-to-r from-accent to-primary hover:from-primary hover:to-accent text-white font-semibold py-6 text-lg transition-all duration-500 hover:shadow-2xl hover:scale-[1.02] rounded-md relative overflow-hidden group"
+                    className="w-full bg-primary hover:bg-primary-600 text-white font-semibold py-5 text-lg transition-all duration-300 hover:shadow-lg shadow-primary/20 rounded-lg"
                   >
-                    <span className="relative z-10">Sign Up for Updates</span>
-                    <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-shimmer" />
+                    Sign Up for Updates
                   </button>
 
                   <p className="text-center text-sm text-gray-500">

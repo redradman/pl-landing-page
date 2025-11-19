@@ -4,6 +4,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Card } from "@/components/ui/card";
 import { Home, User, Heart, Building, Users } from "lucide-react";
+import Image from "next/image";
 
 export default function H4UModel() {
   const ref = useRef(null);
@@ -43,22 +44,22 @@ export default function H4UModel() {
   ];
 
   return (
-    <section id="h4u" className="py-20 bg-white relative overflow-hidden">
+    <section id="h4u" className="py-24 md:py-32 bg-white relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-grid-black/[0.02] [mask-image:radial-gradient(ellipse_at_center,transparent_10%,black)]" />
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-6 md:px-8">
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="text-center mb-12"
+          className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-display-lg font-bold text-primary mb-2">
+          <h2 className="text-4xl md:text-5xl lg:text-display-lg font-bold text-primary mb-4">
             WHAT MAKES HOME FOR US DIFFERENT?
           </h2>
           <div className="h-1 w-64 bg-accent mx-auto mb-6" />
-          <p className="text-gray-600 hidden md:block">Swipe to explore →</p>
+          <p className="text-lg text-gray-600 hidden md:block">Swipe to explore →</p>
         </motion.div>
 
         {/* Desktop: All cards visible */}
@@ -72,7 +73,7 @@ export default function H4UModel() {
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
               >
-                <Card className="p-6 h-full bg-white/80 backdrop-blur-sm border-2 hover:border-accent hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+                <Card className="p-6 h-full bg-white border-2 border-gray-200 hover:border-accent hover:shadow-lg transition-all duration-300">
                   <div className="flex flex-col items-center text-center space-y-4">
                     <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center">
                       <Icon className="w-8 h-8 text-accent" />
@@ -108,7 +109,7 @@ export default function H4UModel() {
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   className="flex-shrink-0 w-80 snap-center"
                 >
-                  <Card className="p-6 h-full bg-white/80 backdrop-blur-sm border-2 hover:border-accent hover:shadow-xl transition-all duration-300">
+                  <Card className="p-6 h-full bg-white border-2 border-gray-200 hover:border-accent hover:shadow-lg transition-all duration-300">
                     <div className="flex flex-col items-center text-center space-y-4">
                       <div className="w-20 h-20 rounded-full bg-accent/10 flex items-center justify-center">
                         <Icon className="w-10 h-10 text-accent" />
@@ -173,11 +174,15 @@ export default function H4UModel() {
                   </li>
                 ))}
               </ul>
-              <div className="mt-6 h-32 bg-gray-300 rounded-md" />
+              <div className="mt-6 h-48 relative rounded-lg overflow-hidden">
+                <div className="h-full bg-gray-300 flex items-center justify-center text-gray-500">
+                  Traditional Care Setting
+                </div>
+              </div>
             </Card>
 
             {/* Home for Us */}
-            <Card className="p-8 bg-accent-light border-2 border-accent">
+            <Card className="p-8 bg-accent-50 border-2 border-accent">
               <h4 className="text-xl font-bold text-primary mb-6 text-center">
                 Home for Us Model
               </h4>
@@ -195,7 +200,14 @@ export default function H4UModel() {
                   </li>
                 ))}
               </ul>
-              <div className="mt-6 h-32 bg-gradient-to-br from-primary/20 to-accent/20 rounded-md" />
+              <div className="mt-6 h-48 relative rounded-lg overflow-hidden">
+                <Image
+                  src="/images/DementiaVillage3.png"
+                  alt="Home for Us model - dementia village concept"
+                  fill
+                  className="object-cover"
+                />
+              </div>
             </Card>
           </div>
         </motion.div>

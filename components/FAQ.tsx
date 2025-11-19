@@ -48,8 +48,8 @@ export default function FAQ() {
   ];
 
   return (
-    <section className="py-20 bg-gray-50">
-      <div className="container mx-auto px-6">
+    <section className="py-24 md:py-32 bg-gray-50">
+      <div className="container mx-auto px-6 md:px-8">
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 30 }}
@@ -57,8 +57,8 @@ export default function FAQ() {
           transition={{ duration: 0.8 }}
           className="max-w-3xl mx-auto"
         >
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-display-lg font-bold text-primary mb-2">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl lg:text-display-lg font-bold text-primary mb-4">
               YOUR QUESTIONS ANSWERED
             </h2>
             <div className="h-1 w-48 bg-accent mx-auto" />
@@ -68,27 +68,22 @@ export default function FAQ() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
+            className="bg-white rounded-xl p-8 shadow-sm border border-gray-100"
           >
-            <Accordion type="single" collapsible className="space-y-4">
+            <Accordion type="single" collapsible className="w-full">
               {faqs.map((faq, index) => (
-                <motion.div
+                <AccordionItem
                   key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
+                  value={`item-${index}`}
+                  className="border-gray-200"
                 >
-                  <AccordionItem
-                    value={`item-${index}`}
-                    className="bg-white rounded-lg px-6 border-none shadow-sm hover:shadow-md transition-shadow"
-                  >
-                    <AccordionTrigger className="text-left hover:no-underline py-6 text-lg font-semibold text-gray-900 hover:text-primary transition-colors">
-                      {faq.question}
-                    </AccordionTrigger>
-                    <AccordionContent className="text-gray-700 pb-6 leading-relaxed">
-                      {faq.answer}
-                    </AccordionContent>
-                  </AccordionItem>
-                </motion.div>
+                  <AccordionTrigger className="text-left hover:no-underline py-6 text-lg font-semibold text-gray-900 hover:text-primary transition-colors">
+                    {faq.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-gray-700 text-base leading-relaxed">
+                    {faq.answer}
+                  </AccordionContent>
+                </AccordionItem>
               ))}
             </Accordion>
           </motion.div>

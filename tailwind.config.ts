@@ -11,12 +11,58 @@ const config: Config = {
   	extend: {
   		colors: {
   			primary: {
-  				DEFAULT: '#003DA5',
-  				light: '#4A6FB5'
+  				'50': '#E8F3F9',
+  				'100': '#D1E7F3',
+  				'200': '#A3CFE7',
+  				'300': '#75B7DB',
+  				'400': '#5199C0',
+  				'500': '#4180A0',
+  				'600': '#336680',
+  				'700': '#254D60',
+  				'800': '#1A3440',
+  				'900': '#0D1A20',
+  				DEFAULT: '#5199C0',
+  				dark: '#353A49'
   			},
   			accent: {
-  				DEFAULT: '#00ABC8',
-  				light: '#E5F6F9'
+  				'50': '#EEF7F8',
+  				'100': '#DDEFF1',
+  				'200': '#BBDFE3',
+  				'300': '#99CFD5',
+  				'400': '#81B0B9',
+  				'500': '#6A959D',
+  				'600': '#547A81',
+  				'700': '#3F5C61',
+  				'800': '#2A3D41',
+  				'900': '#151F20',
+  				DEFAULT: '#81B0B9',
+  				light: '#DEDFDE'
+  			},
+  			secondary: {
+  				'50': '#FBE8E9',
+  				'100': '#F7D1D3',
+  				'200': '#EFA3A7',
+  				'300': '#E7757B',
+  				'400': '#DF474F',
+  				'500': '#CC3E48',
+  				'600': '#A3323A',
+  				'700': '#7A252B',
+  				'800': '#52191D',
+  				'900': '#290C0E',
+  				DEFAULT: '#CC3E48'
+  			},
+  			tertiary: {
+  				'50': '#F3F1F0',
+  				'100': '#E7E3E1',
+  				'200': '#CFC7C3',
+  				'300': '#B7ABA5',
+  				'400': '#9F8F87',
+  				'500': '#918274',
+  				'600': '#74685D',
+  				'700': '#574E46',
+  				'800': '#3A342E',
+  				'900': '#1D1A17',
+  				DEFAULT: '#918274'
   			},
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
@@ -56,22 +102,36 @@ const config: Config = {
   		},
   		fontSize: {
   			'display-xl': [
-  				'64px',
+  				'72px',
   				{
-  					lineHeight: '72px',
-  					letterSpacing: '-1px'
+  					lineHeight: '80px',
+  					letterSpacing: '-1.5px'
   				}
   			],
   			'display-lg': [
-  				'48px',
+  				'56px',
   				{
-  					lineHeight: '56px'
+  					lineHeight: '64px',
+  					letterSpacing: '-1px'
   				}
   			],
   			'display-md': [
-  				'24px',
+  				'32px',
   				{
-  					lineHeight: '32px'
+  					lineHeight: '40px',
+  					letterSpacing: '-0.5px'
+  				}
+  			],
+  			'body-lg': [
+  				'20px',
+  				{
+  					lineHeight: '34px'
+  				}
+  			],
+  			'body-md': [
+  				'16px',
+  				{
+  					lineHeight: '27px'
   				}
   			]
   		},
@@ -90,7 +150,11 @@ const config: Config = {
   		boxShadow: {
   			sm: '0 1px 3px rgba(0,0,0,0.1)',
   			DEFAULT: '0 4px 6px rgba(0,0,0,0.1)',
-  			lg: '0 10px 15px rgba(0,0,0,0.1)'
+  			lg: '0 10px 15px rgba(0,0,0,0.1)',
+  		},
+  		backgroundImage: {
+  			'gradient-primary': 'linear-gradient(135deg, #5199C0 0%, #81B0B9 100%)',
+  			'gradient-radial': 'radial-gradient(circle, var(--tw-gradient-stops))',
   		},
   		keyframes: {
   			'accordion-down': {
@@ -108,11 +172,22 @@ const config: Config = {
   				to: {
   					height: '0'
   				}
+  			},
+  			'fade-in-up': {
+  				'0%': {
+  					opacity: '0',
+  					transform: 'translateY(10px)'
+  				},
+  				'100%': {
+  					opacity: '1',
+  					transform: 'translateY(0)'
+  				}
   			}
   		},
   		animation: {
   			'accordion-down': 'accordion-down 0.2s ease-out',
-  			'accordion-up': 'accordion-up 0.2s ease-out'
+  			'accordion-up': 'accordion-up 0.2s ease-out',
+  			'fade-in-up': 'fade-in-up 0.5s ease-out'
   		}
   	}
   },
