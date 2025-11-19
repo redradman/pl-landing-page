@@ -1,10 +1,14 @@
 "use client";
 
 import { motion, useInView, AnimatePresence } from "framer-motion";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Progress } from "@/components/ui/progress";
+import { useToast } from "@/hooks/use-toast";
+import { Toaster } from "@/components/ui/toaster";
 import {
   Select,
   SelectContent,
@@ -12,11 +16,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, Loader2 } from "lucide-react";
 
 export default function SignupForm() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const { toast } = useToast();
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -27,7 +32,21 @@ export default function SignupForm() {
 
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [signupCount] = useState(523); // Demo count
+  const [formProgress, setFormProgress] = useState(0);
+
+  // Calculate form completion progress
+  useEffect(() => {
+    const fields = [
+      formData.firstName,
+      formData.lastName,
+      formData.email,
+      formData.status,
+    ];
+    const filledFields = fields.filter((field) => field.trim() !== "").length;
+    setFormProgress((filledFields / fields.length) * 100);
+  }, [formData]);
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
@@ -58,9 +77,18 @@ export default function SignupForm() {
     e.preventDefault();
 
     if (validateForm()) {
+      setIsSubmitting(true);
       // Simulate submission
       setTimeout(() => {
+        setIsSubmitting(false);
         setIsSubmitted(true);
+
+        // Show success toast
+        toast({
+          title: "Welcome aboard! 🎉",
+          description: `You're signup #${signupCount + 1}. Check your email for next steps.`,
+        });
+
         // Reset form after 5 seconds
         setTimeout(() => {
           setIsSubmitted(false);
@@ -71,7 +99,7 @@ export default function SignupForm() {
             status: "",
           });
         }, 5000);
-      }, 500);
+      }, 1500);
     }
   };
 
@@ -107,6 +135,17 @@ export default function SignupForm() {
             <p className="text-xl text-gray-700">
               Join {signupCount}+ people already signed up for updates
             </p>
+
+            {/* Progress indicator */}
+            {!isSubmitted && (
+              <div className="max-w-md mx-auto mt-6">
+                <div className="flex justify-between text-sm text-gray-600 mb-2">
+                  <span>Form completion</span>
+                  <span className="font-semibold">{Math.round(formProgress)}%</span>
+                </div>
+                <Progress value={formProgress} className="h-2" />
+              </div>
+            )}
           </div>
 
           <motion.div
@@ -245,26 +284,33 @@ export default function SignupForm() {
                   </div>
 
                   {/* Consent */}
-                  <div className="flex items-start gap-2">
-                    <input
-                      type="checkbox"
+                  <div className="flex items-start gap-3">
+                    <Checkbox
                       id="consent"
-                      className="mt-1 w-4 h-4 text-accent focus:ring-accent border-gray-300 rounded"
                       required
+                      className="mt-1 data-[state=checked]:bg-accent data-[state=checked]:border-accent"
                     />
-                    <label htmlFor="consent" className="text-sm text-gray-600">
+                    <label htmlFor="consent" className="text-sm text-gray-600 leading-relaxed cursor-pointer">
                       I agree to receive updates from Providence Living about career
                       opportunities
                     </label>
                   </div>
 
                   {/* Submit Button */}
-                  <button
+                  <Button
                     type="submit"
-                    className="w-full bg-primary hover:bg-primary-600 text-white font-semibold py-5 text-lg transition-all duration-300 hover:shadow-lg shadow-primary/20 rounded-lg"
+                    className="w-full bg-primary hover:bg-primary-600 text-white font-semibold py-5 text-lg transition-all duration-300 hover:shadow-lg shadow-primary/20 h-auto"
+                    disabled={isSubmitting || formProgress < 100}
                   >
-                    Sign Up for Updates
-                  </button>
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                        Submitting...
+                      </>
+                    ) : (
+                      'Sign Up for Updates'
+                    )}
+                  </Button>
 
                   <p className="text-center text-sm text-gray-500">
                     We respect your privacy. Unsubscribe anytime.
@@ -305,6 +351,7 @@ export default function SignupForm() {
           </motion.div>
         </motion.div>
       </div>
+      <Toaster />
     </section>
   );
 }

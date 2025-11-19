@@ -102,10 +102,12 @@ const BentoCard = ({ item, index }: { item: BentoItem; index?: number }) => {
   return (
     <div
       className={cn(
-        "group relative flex flex-col h-full rounded-2xl overflow-hidden",
-        "bg-white border border-gray-200",
-        "hover:border-accent hover:shadow-xl hover:-translate-y-1",
-        "transition-all duration-300 opacity-0 animate-fade-in-up",
+        "group relative flex flex-col h-full rounded-3xl overflow-hidden",
+        "bg-gradient-to-br from-white to-gray-50",
+        "border-2 border-gray-100",
+        "hover:border-accent/50 hover:shadow-2xl hover:shadow-accent/10",
+        "transition-all duration-500 opacity-0 animate-fade-in-up",
+        "hover:scale-[1.02]",
         item.className
       )}
       style={{
@@ -113,9 +115,9 @@ const BentoCard = ({ item, index }: { item: BentoItem; index?: number }) => {
         animationFillMode: 'forwards'
       }}
     >
-      {/* Image Section */}
+      {/* Image Section with Overlay Content */}
       {item.image && (
-        <div className="relative h-48 md:h-56 overflow-hidden bg-gray-100">
+        <div className="relative h-72 md:h-80 overflow-hidden">
           <Image
             src={item.image}
             alt={item.title}
@@ -123,36 +125,62 @@ const BentoCard = ({ item, index }: { item: BentoItem; index?: number }) => {
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             loading={isFirstTwo ? "eager" : "lazy"}
             priority={isFirstTwo}
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            className="object-cover transition-all duration-700 group-hover:scale-110 group-hover:rotate-1"
           />
-          {/* Gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-primary-dark/80 via-primary-dark/40 to-transparent" />
 
-          {/* Icon badge */}
-          <div className="absolute top-4 right-4 p-3 rounded-xl bg-white/90 backdrop-blur-sm shadow-lg">
-            <Icon className="w-6 h-6 text-primary" />
+          {/* Multi-layer gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-primary-dark via-primary-dark/60 to-transparent opacity-80 group-hover:opacity-70 transition-opacity duration-500" />
+          <div className="absolute inset-0 bg-gradient-to-br from-accent/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+          {/* Icon badge with accent */}
+          <div className="absolute top-6 right-6 p-4 rounded-2xl bg-white shadow-2xl group-hover:bg-accent group-hover:scale-110 transition-all duration-300">
+            <Icon className="w-7 h-7 text-primary group-hover:text-white transition-colors duration-300" />
+          </div>
+
+          {/* Title overlaid on image */}
+          <div className="absolute bottom-0 left-0 right-0 p-6 pb-4">
+            <div className="inline-block px-3 py-1 rounded-full bg-accent/90 backdrop-blur-sm mb-3">
+              <span className="text-xs font-bold text-white uppercase tracking-wider">
+                Featured
+              </span>
+            </div>
+            <h3 className="text-3xl md:text-4xl font-bold text-white mb-2 drop-shadow-2xl transform group-hover:translate-x-2 transition-transform duration-300">
+              {item.title}
+            </h3>
           </div>
         </div>
       )}
 
-      {/* Content Section */}
-      <div className="flex-1 p-6 flex flex-col">
-        <div className="flex-1">
-          <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-primary transition-colors">
-            {item.title}
-          </h3>
+      {/* Content Section - Redesigned */}
+      <div className="flex-1 p-8 flex flex-col bg-white">
+        <p className="text-base text-gray-600 mb-6 leading-relaxed font-medium">
+          {item.description}
+        </p>
 
-          <p className="text-sm text-gray-600 mb-4 leading-relaxed">
-            {item.description}
-          </p>
-
-          {item.features && (
-            <div className="mt-4">
-              <FeaturesSpotlight items={item.features} />
-            </div>
-          )}
-        </div>
+        {item.features && (
+          <div className="mt-auto">
+            <div className="h-px bg-gradient-to-r from-accent via-primary to-transparent mb-5 opacity-30" />
+            <ul className="grid grid-cols-1 gap-3">
+              {item.features.map((feature, idx) => (
+                <li
+                  key={`feature-${idx}`}
+                  className="flex items-center gap-3 group/item"
+                >
+                  <div className="flex-shrink-0 w-6 h-6 rounded-full bg-gradient-to-br from-accent to-primary flex items-center justify-center">
+                    <CheckCircle2 className="h-3.5 w-3.5 text-white" />
+                  </div>
+                  <span className="text-sm font-medium text-gray-700 group-hover/item:text-primary transition-colors">
+                    {feature}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
+
+      {/* Accent border that appears on hover */}
+      <div className="absolute inset-0 rounded-3xl border-2 border-accent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
     </div>
   );
 };
